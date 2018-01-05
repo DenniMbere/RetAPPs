@@ -23,4 +23,8 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	
+	<bean class="retapps.dao.UserDAO" id="userDao"/>
+	<bean class="retapps.dao.RetailerDAO" id="retailerDao"/>
+	
 </beans>

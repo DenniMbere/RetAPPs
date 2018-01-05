@@ -1,13 +1,13 @@
 package retapps.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import retapps.dao.RetailerDAO;
@@ -19,8 +19,12 @@ import retapps.entities.User;
 @Controller
 public class SpringController 
 {
-	RetailerDAO daoRetailer = new RetailerDAO();
-	UserDAO daoUser = new UserDAO();
+	@Autowired
+	@Qualifier("retailerDao")
+	RetailerDAO daoRetailer ;
+	@Autowired
+	@Qualifier("userDao")
+	UserDAO daoUser;
  
 	@RequestMapping(value="/retailers",method = RequestMethod.GET)
 	public @ResponseBody List<Retailer> getRetailersJSON()
