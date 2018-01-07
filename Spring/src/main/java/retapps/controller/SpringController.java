@@ -2,10 +2,12 @@ package retapps.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,22 +43,15 @@ public class SpringController
 	{
 		return daoRetailer.find(code).getUsers();
 	}
-	@RequestMapping(value="/update/{cf}/{name}/{surname}/{mail}/{birthday}/{shopId}", method = RequestMethod.POST,produces="application/json")
+	@RequestMapping(value="/users/{cf}", method = RequestMethod.PATCH,produces="application/json")
 	public @ResponseBody User updateUserJSON
 	(
 			@PathVariable("cf") String cf,
-			@PathVariable("name") String name,
-			@PathVariable("surname") String surname,
-			@PathVariable("mail") String mail,
-			@PathVariable("birthday") String birthday,
-			@PathVariable("shopId") int shopId
+			@RequestBody User user
 	)
 	{
-		daoUser.update(cf, name, surname, mail, birthday, shopId);
+		daoUser.update(cf, user.getName(), user.getSurname(), user.getMail(), user.getBirthday(), user.getShop_id());
 		return daoUser.find(cf);
 	}
-	
-	
-	
 	
 }

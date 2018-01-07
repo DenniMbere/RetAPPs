@@ -121,21 +121,10 @@ public class UserDAO
 		}
 		return user;
 	}
-	public void update(String cf,String name,String surname,String mail,String birthday,int shopId)
+	public void update(String cf,String name,String surname,String mail,Date birthday,int shopId)
 	{
 		connection.create();
 		User user = null;
-		Date date = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		try 
-		{
-			date = sdf.parse(birthday);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		System.out.println(date);
 		try
 		{
 			connection.begin();
@@ -143,7 +132,7 @@ public class UserDAO
 			user.setName(name);
 			user.setSurname(surname);
 			user.setMail(mail);
-			user.setBirthday(date);
+			user.setBirthday(birthday);
 			user.setShop_id(shopId);
 			user = connection.getEm().merge(user);
 			connection.commit();
